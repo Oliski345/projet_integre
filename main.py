@@ -1,3 +1,7 @@
+from gestionmédia import Médiateque
+from gestionmédia import CD
+
+
 def afficher_menu():
     """Fonction pour afficher le menu"""
     print("\n====MENU PRINCIPAL====")
@@ -22,9 +26,13 @@ def main():
         if choix == '0':
             print("Au revoir")
             break
+        elif choix == '1':
+            while True:
+                media = input("Rentrez un livre l'identifiant, titre, annee, genre, auteur et nb_pages ou"
+                              "un DVD l'identifiant, titre, annee, genre, réalisateur et durée ou"
+                              "un CD l'identifiant, titre, annee, genre, artiste et nombre de piste :")
+                mediatheque.ajouter_media(media)
 
 
 if __name__ == "__main__":
     main()
-
-

@@ -111,7 +111,7 @@ class DVD(Media, Empruntable):
 
 class CD(Media, Empruntable):
     """ gestion des CD"""
-    def __init__(self, identifiants, titre, annee, genre, ariste, nb_piste):
+    def __init__(self, identifiants, titre, annee, genre, artiste, nb_piste):
         super().__init__(identifiants, titre, annee, genre)
         self.__nb_piste = nb_piste
         self.__artiste = artiste
@@ -142,6 +142,48 @@ class CD(Media, Empruntable):
     def afficher_detail(self):
         return f"{super().afficher_detail()}, Auteur: {self.__auteur}, nb_pages: {self.__nb_pages}"
 
+
+class Mediatheque:
+    def __init__(self):
+        self.__medias = {}
+        self.__utilisateurs = {}
+        self.__emprunts = set()  # Ensemble pour gérer les emprunts
+        self.__historique = []  # Liste pour l'historique des emprunts
+
+    def ajouter_media(self, media):
+        self.__medias[media.identifiant] = media
+
+    def ajouter_utilisateur(self, utilisateur):
+        self.__utilisateurs[utilisateur.identifiant] = utilisateur
+
+    def emprunter_media(self, media_identifiant, utilisateur_identifiant):
+        if media_identifiant in self.__medias and utilisateur_identifiant in self.__utilisateurs:
+            media = self.__medias[media_identifiant]
+            utilisateur = self.__utilisateurs[utilisateur_identifiant]
+            if media_identifiant not in self.__emprunts:
+                media.emprunter()
+                self.__emprunts.add(media_identifiant)
+                self.__historique.append((utilisateur.nom, media.titre, "emprunté"))
+            else:
+                print(f"Le média '{media.titre}' est déjà emprunté.")
+        else:
+            print("Média ou utilisateur non trouvé.")
+
+    def rendre_media(self, media_identifiant, utilisateur_identifiant):
+        if media_identifiant in self.__medias and utilisateur_identifiant in self.__utilisateurs:
+            media = self.__medias[media_identifiant]
+            if media_identifiant in self.__emprunts:
+                media.rendre()
+                self.__emprunts.remove(media_identifiant)
+                self.__historique.append((self.__utilisateurs[utilisateur_identifiant].nom, media.titre, "rendu"))
+            else:
+                print(f"Le média '{media.titre}' n'a pas été emprunté.")
+        else:
+            print("Média ou utilisateur non trouvé.")
+
+    def afficher_historique(self):
+        for entry in self.__historique:
+            print(f"Utilisateur: {entry[0]}, Média: {entry[1]}, Action: {entry[2]}")
 
 
         
