@@ -21,6 +21,23 @@ class Utilisateur:
         return self.__identifiant
 
     def creer(self):
+        nb_utilisateur = 0
         while True:
-            self.__identifiant = input("Identifiant: ")
+            while True:
+                identifiant = input("Identifiant: ")
+                if identifiant in self.__identifiant:
+                    print("Identifiant déjà utiliser")
+                    continue
+                else:
+                    identifiant = self.__identifiant
+                    break
+            self.__nom = nom = input("Votre Nom: ")
+            self.__prenom = prenom = input("Votre Prenom: ")
+            self.__email = email = input("Votre Email: ")
+            nb_utilisateur += 1
+            break
+        return Utilisateur(nom, prenom, email, identifiant), nb_utilisateur
+
+
+
 
