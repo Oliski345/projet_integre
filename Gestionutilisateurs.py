@@ -4,6 +4,7 @@ class Utilisateur:
         self.__prenom = prenom
         self.__email = email
         self.__identifiant = identifiant
+        self.__historique_emprunt = []
 
     @property
     def nom(self):
@@ -19,26 +20,34 @@ class Utilisateur:
     @property
     def identifiant(self):
         return self.__identifiant
+    @property
+    def historique_emprunt(self):
+        return self.__historique_emprunt
 
-    def creer(self):
-        nb_utilisateur = 0
-        while True:
-            while True:
-                identifiant = input("Identifiant: ")
-                if identifiant in self.__identifiant:
-                    print("Identifiant déjà utiliser")
-                    continue
-                else:
-                    identifiant = self.__identifiant
-                    break
-            self.__nom = nom = input("Votre Nom: ")
-            self.__prenom = prenom = input("Votre Prenom: ")
-            self.__email = email = input("Votre Email: ")
-            nb_utilisateur += 1
-            break
-        return Utilisateur(nom, prenom, email, identifiant), nb_utilisateur
-    
+    def ajouter_emprunt(self, media, date_emprunt, date_retour):
+        emprunt = (media, date_emprunt, date_retour)
+        self.__historique_emprunts.append(emprunt)
 
+    def afficher_historique(self):
+        if not self.__historique_emprunts:
+            print(f"Aucun emprunt effectué par {self.__prenom} {self.__nom}.")
+            return
+        print(f"Historique des emprunts de {self.__prenom} {self.__nom}:")
+        for media, date_emprunt, date_retour in self.__historique_emprunts:
+            print(f"  Média: {media.titre}, Date d'emprunt: {date_emprunt}, Date de retour prévue: {date_retour}")
+
+    def afficher_details(self):
+        print(f"Utilisateur: {self.__prenom} {self.__nom}")
+        print(f"Email: {self.__email}")
+        print(f"ID Utilisateur: {self.__identifiant}")
+        self.afficher_historique()
+
+    @classmethod
+    def creer(cls, nom, prenom, email, identifiant):
+        identifiant = len(utilisateurs) + 1 # créer identifiant unique
+        utilisateur = cls(nom, prenom, email, identifiant)
+        utilisateurs[identifiant] = utilisateur
+        return utilisateur
 
 
 
