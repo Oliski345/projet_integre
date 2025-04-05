@@ -37,6 +37,7 @@ class Utilisateur:
             nb_utilisateur += 1
             break
         return Utilisateur(nom, prenom, email, identifiant), nb_utilisateur
+    
 
 
 
