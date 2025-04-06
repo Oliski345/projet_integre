@@ -28,8 +28,8 @@ class Utilisateur:
         emprunt = (media, date_emprunt, date_retour)
         self.__historique_emprunts.append(emprunt)
 
-    def afficher_historique(self):
-        if not self.__historique_emprunts:
+    if not self.__historique_emprunts:
+        def afficher_historique(self):
             print(f"Aucun emprunt effectué par {self.__prenom} {self.__nom}.")
             return
         print(f"Historique des emprunts de {self.__prenom} {self.__nom}:")
@@ -44,7 +44,8 @@ class Utilisateur:
 
     @classmethod
     def creer(cls, nom, prenom, email, identifiant):
-        identifiant = len(utilisateurs) + 1 # créer identifiant unique
+        """Création d'un utilisateur"""
+        identifiant = len(utilisateurs) + 1
         utilisateur = cls(nom, prenom, email, identifiant)
         utilisateurs[identifiant] = utilisateur
         return utilisateur

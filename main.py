@@ -1,38 +1,59 @@
-from gestionmédia import Médiateque
-from gestionmédia import CD
+from gestionmédia import Mediatheque, Livre, DVD, CD, Utilisateur  # Assurez-vous que les classes sont bien importées
+
+# Dictionnaire pour stocker les utilisateurs
+utilisateurs = {}
 
 
+def ajouter_utilisateur(mediatheque):
+    """Ajoute un utilisateur à la médiathèque"""
+    nom = input("Entrez le nom de l'utilisateur : ")
+    prenom = input("Entrez le prénom de l'utilisateur : ")
+    email = input("Entrez l'email de l'utilisateur : ")
+    utilisateur = Utilisateur.creer(nom, prenom, email, utilisateurs)  # Utilisation du dictionnaire utilisateurs
+    print(f"Utilisateur {nom} {prenom} ajouté avec succès !")
 
-def afficher_menu():
-    """Fonction pour afficher le menu"""
-    print("\n====MENU PRINCIPAL====")
-    print("1. Ajouter un média")
-    print("2. Rechercher des médias")
-    print("3. Afficher les détails d'un média")
-    print("4. Ajouter un utilisateur")
-    print("5. Emprunter un média")
-    print("6. Retourner un média")
-    print("7. Afficher l'historique d'un utilisateur")
-    print("8. Consulter les statistiques de la médiatèque")
-    print("0. Quitter")
-    return input("Choississez une option")
+
+def afficher_utilisateur_details():
+    """Affiche les détails d'un utilisateur donné par son identifiant"""
+    utilisateur_id = int(input("Entrez l'identifiant de l'utilisateur : "))
+    utilisateur = utilisateurs.get(utilisateur_id)
+    if utilisateur:
+        utilisateur.afficher_details()
+    else:
+        print("Utilisateur non trouvé.")
 
 
 def main():
-    """Programme principale interactif"""
-    print("Bienvenue dans le programme de système de gestion médiatèque")
+    """Programme principal interactif"""
+    print("Bienvenue dans le programme de gestion de médiathèque")
+
+    # Création d'une instance de la médiathèque
+    mediatheque = Mediatheque()
 
     while True:
         choix = afficher_menu()
+
         if choix == '0':
             print("Au revoir")
             break
         elif choix == '1':
-            while True:
-                media = input("Rentrez un livre l'identifiant, titre, annee, genre, auteur et nb_pages ou"
-                              "un DVD l'identifiant, titre, annee, genre, réalisateur et durée ou"
-                              "un CD l'identifiant, titre, annee, genre, artiste et nombre de piste :")
-                mediatheque.ajouter_media(media)
+            ajouter_media(mediatheque)
+        elif choix == '2':
+            rechercher_media(mediatheque)
+        elif choix == '3':
+            afficher_details_media(mediatheque)
+        elif choix == '4':
+            ajouter_utilisateur(mediatheque)
+        elif choix == '5':
+            emprunter_media(mediatheque)
+        elif choix == '6':
+            retourner_media(mediatheque)
+        elif choix == '7':
+            afficher_utilisateur_details()
+        elif choix == '8':
+            afficher_statistiques(mediatheque)
+        else:
+            print("Choix invalide. Essayez de nouveau.")
 
 
 if __name__ == "__main__":
