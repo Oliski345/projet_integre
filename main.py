@@ -3,7 +3,6 @@ from gestionmédia import Mediatheque, Livre, DVD, CD, Utilisateur  # Assurez-vo
 # Dictionnaire pour stocker les utilisateurs
 utilisateurs = {}
 
-
 def ajouter_utilisateur(mediatheque):
     """Ajoute un utilisateur à la médiathèque"""
     nom = input("Entrez le nom de l'utilisateur : ")
