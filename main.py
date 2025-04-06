@@ -2,6 +2,7 @@ from gestionmédia import Médiateque
 from gestionmédia import CD
 
 
+
 def afficher_menu():
     """Fonction pour afficher le menu"""
     print("\n====MENU PRINCIPAL====")
