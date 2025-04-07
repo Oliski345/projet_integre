@@ -1,4 +1,5 @@
 class Utilisateur:
+    """Initalisation de la classe Utilisateur"""
     def __init__(self, nom, prenom, email, identifiant):
         self.__nom = nom
         self.__prenom = prenom
@@ -30,6 +31,7 @@ class Utilisateur:
 
     if not self.__historique_emprunts:
         def afficher_historique(self):
+            """Fonction qui affiche l'historique d'empreunt d'Un utilisateur"""
             print(f"Aucun emprunt effectué par {self.__prenom} {self.__nom}.")
             return
         print(f"Historique des emprunts de {self.__prenom} {self.__nom}:")

@@ -1,8 +1,6 @@
-from gestionmédia import Mediatheque, Livre, DVD, CD, Utilisateur  # Assurez-vous que les classes sont bien importées
-
-# Dictionnaire pour stocker les utilisateurs
+from gestionmédia import Mediatheque, Livre, DVD, CD, Utilisateur
+# Olivier Pinard et Juliette Danis
 utilisateurs = {}
-
 def ajouter_utilisateur(mediatheque):
     """Ajoute un utilisateur à la médiathèque"""
     nom = input("Entrez le nom de l'utilisateur : ")
@@ -13,7 +11,7 @@ def ajouter_utilisateur(mediatheque):
 
 
 def afficher_utilisateur_details():
-    """Affiche les détails d'un utilisateur donné par son identifiant"""
+    """Affiche les détails d'un utilisateur grâce à son identifiant"""
     utilisateur_id = int(input("Entrez l'identifiant de l'utilisateur : "))
     utilisateur = utilisateurs.get(utilisateur_id)
     if utilisateur:
@@ -22,15 +20,29 @@ def afficher_utilisateur_details():
         print("Utilisateur non trouvé.")
 
 
+
+
 def main():
     """Programme principal interactif"""
     print("Bienvenue dans le programme de gestion de médiathèque")
+    print("\n==== MENU PRINCIPAL ====")
+    print("1. Ajouter un média")
+    print("2. Rechercher des médias")
+    print("3. Afficher les détails d'un média")
+    print("4. Ajouter un utilisateur")
+    print("5. Emprunter un média")
+    print("6. Retourner un média")
+    print("7. Afficher l'historique d'un utilisateur")
+    print("8. Consulter les statistiques de la médiathèque")
+    print("0. Quitter")
+
+    # Demande à l'utilisateur de choisir une option
+    choix = input("Choisissez une option (0-8): ")
 
     # Création d'une instance de la médiathèque
     mediatheque = Mediatheque()
 
     while True:
-        choix = afficher_menu()
 
         if choix == '0':
             print("Au revoir")
@@ -53,7 +65,7 @@ def main():
             afficher_statistiques(mediatheque)
         else:
             print("Choix invalide. Essayez de nouveau.")
-
-
+    
+    
 if __name__ == "__main__":
     main()
